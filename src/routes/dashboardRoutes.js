@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { mockPacientes } = require('../models/mock'); // Importa os dados
+const { mockPacientes } = require('../models/db'); // Importa os dados
 
 /**
  * @route   GET /api/statistics

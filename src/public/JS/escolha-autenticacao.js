@@ -63,7 +63,7 @@ botaoEntrar.addEventListener("click", async (e) => {
     if (tipoUsuario === "responsavel") {
       window.location.href = "escolha-perfil.html";
     } else {
-      window.location.href = "painel-admin.html";
+      window.location.href = "dashboard.html";
     }
 
   } catch (erro) {

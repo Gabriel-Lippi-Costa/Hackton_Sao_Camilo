@@ -119,6 +119,7 @@ main .criar-perfil {
   justify-content: center;
   margin-top: 10px;
   margin-bottom: 20px;
+  gap: 20px;
 }
 
 main .criar-perfil button {

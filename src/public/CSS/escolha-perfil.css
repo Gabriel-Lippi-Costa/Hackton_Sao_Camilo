@@ -114,6 +114,13 @@ main .cabecalho-main h3 {
   font-weight: 400;
 }
 
+main .criar-perfil {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 main .criar-perfil button {
   display: flex;
   align-items: center;
@@ -129,33 +136,283 @@ main .criar-perfil button {
   transition: background-color 0.25s;
 }
 
+header .criar-perfil button:hover {
+  background-color: #153fa5;
+}
+
 main .cards {
   display: flex;
   justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 25px;
+  padding: 20px 60px;
 }
 
 main .cards .card {
-  width: 400px;
-  height: 50px;
-  background-color: white;
+  width: 350px;
+  background-color: #fff;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: row;
-  gap: 20px;
-  border-radius: 20px;
+  justify-content: space-between;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.25s ease;
+  position: relative;
 }
 
-main .cards .card i {
+main .cards .card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(26, 86, 240, 0.18);
+}
+
+main .cards .card i.bi-person {
   color: #1a56f0;
-  font-size: 28px;
+  font-size: 34px;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+main .cards .card .nome-paciente,
+main .cards .card .info-paciente {
+  font-family: "Poppins", sans-serif;
+  display: block;
+  text-align: left;
+  margin-left: 12px;
 }
 
 main .cards .card .nome-paciente {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+main .cards .card .info-paciente {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+main .cards .card .bi-trash {
+  font-size: 22px;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+main .cards .card .bi-trash:hover {
+  color: #dc2626;
+}
+
+main .cards .card .card-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+}
+
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal {
+  background: #fff;
+  padding: 25px 35px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal h2 {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  color: #111827;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal label {
+  font-size: 18px;
+  color: #374151;
+  font-weight: 500;
+}
+
+.modal input {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.modal input:focus {
+  outline: none;
+  border-color: #1a56f0;
+  background-color: #fff;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.modal-buttons button {
+  flex: 1;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.25s;
+}
+
+.modal-buttons #cancelar {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.modal-buttons #cancelar:hover {
+  background-color: #d1d5db;
+}
+
+.modal-buttons button[type="submit"] {
+  background-color: #1a56f0;
+  color: white;
+}
+
+.modal-buttons button[type="submit"]:hover {
+  background-color: #153fa5;
+}
+
+.modal-container.ativo {
+  display: flex;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+
+/* Tablets e telas médias (até 900px) */
+@media (max-width: 900px) {
+  header {
+    padding: 14px 30px;
+  }
+
+  header .lado-esquerdo h2 {
+    font-size: 20px;
+  }
+
+  header .lado-esquerdo h3 {
+    font-size: 13px;
+  }
+
+  header .lado-direito {
+    gap: 12px;
+  }
+
+  header .lado-direito .nome-responsavel {
+    font-size: 14px;
+  }
+
+  header .lado-direito button {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+}
+
+/* Celulares (até 600px) */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 16px 24px;
+  }
+
+  header .lado-esquerdo {
+    width: 100%;
+    text-align: center;
+  }
+
+  header .lado-esquerdo h2 {
     font-size: 18px;
-    font-weight: bolder;
-    
+  }
+
+  header .lado-esquerdo h3 {
+    font-size: 12px;
+  }
+
+  header .lado-direito {
+    width: 100%;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  header .lado-direito .bi-person {
+    font-size: 24px;
+    padding: 6px;
+  }
+
+  header .lado-direito .nome-responsavel {
+    font-size: 14px;
+  }
+
+  header .lado-direito button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
+/* Celulares muito pequenos (até 400px) */
+@media (max-width: 400px) {
+  header {
+    padding: 12px 16px;
+  }
+
+  header .lado-esquerdo h2 {
+    font-size: 16px;
+  }
+
+  header .lado-direito {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  header .lado-direito button {
+    width: 100%;
+    justify-content: center;
+  }
 }

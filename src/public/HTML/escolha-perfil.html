@@ -48,20 +48,47 @@
         <section class="cards">
             <section class="card">
                 <i class="bi bi-person"></i>
-                <span class="nome-paciente">Maria</span>
-                <span class="info-paciente">78 anos - Mãe</span>
+                <div class="card-info">
+                    <span class="nome-paciente">Maria</span>
+                    <span class="info-paciente">78 anos - Mãe</span>
+                </div>
                 <i class="bi bi-trash"></i>
             </section>
 
             <section class="card">
                 <i class="bi bi-person"></i>
-                <span>Afonso</span>
-                <span>78 anos - Pai</span>
+                <div class="card-info">
+                    <span class="nome-paciente">Afonso</span>
+                    <span class="info-paciente">78 anos - Pai</span>
+                </div>
                 <i class="bi bi-trash"></i>
             </section>
         </section>
+
+        <div class="modal-container" id="modal-criar-perfil">
+            <div class="modal">
+                <h2>Adicionar Perfil</h2>
+
+                <form id="form-criar-perfil">
+                    <label for="nome">Nome Completo</label>
+                    <input type="text" id="nome" required placeholder="Ex: Maria">
+
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" required placeholder="Ex: 78">
+
+                    <label for="parentesco">Grau Parentesco</label>
+                    <input type="text" id="parentesco" required placeholder="Ex: Mãe">
+
+                    <section class="modal-buttons">
+                        <button type="button" id="cancelar">Cancelar</button>
+                        <button type="submit">Salvar</button>
+                    </section>
+                </form>
+            </div>
+        </div>
     </main>
 
+    <script src="../JS/criar-perfil.js"></script>
 </body>
 
 </html>

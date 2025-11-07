@@ -37,11 +37,11 @@ botaoEntrar.addEventListener("click", async (e) => {
   if (tipoUsuario === "responsavel") {
     email = document.querySelector("#email-responsavel").value.trim();
     senha = document.querySelector("#senha-responsavel").value.trim();
-    endpoint = "/auth/login/cuidador"; // ✅ corrigido (tinha faltado a barra inicial)
+    endpoint = "/auth/login/cuidador";
   } else {
     email = document.querySelector("#email-administrador").value.trim();
     senha = document.querySelector("#senha-administrador").value.trim();
-    endpoint = "/auth/login/funcionario"; // ✅ corrigido
+    endpoint = "/auth/login/funcionario";
   }
 
   if (!email || !senha) {
@@ -50,7 +50,7 @@ botaoEntrar.addEventListener("click", async (e) => {
   }
 
   try {
-    console.log("URL final:", `${baseURL}${endpoint}`); // 🧩 debug
+    console.log("URL final:", `${baseURL}${endpoint}`);
     const response = await axios.post(`${baseURL}${endpoint}`, {
       email,
       senha,
@@ -59,6 +59,11 @@ botaoEntrar.addEventListener("click", async (e) => {
     console.log(response.data);
     alert(response.data.mensagem || "Login realizado com sucesso!");
 
+    // 🔹 Salva o usuário logado no localStorage (CORREÇÃO PRINCIPAL)
+    localStorage.removeItem("usuarioLogado");
+    localStorage.setItem("usuarioLogado", JSON.stringify(response.data.usuario));
+
+    // 🔹 Redireciona para a página correta
     if (tipoUsuario === "responsavel") {
       window.location.href = "escolha-perfil.html";
     } else {

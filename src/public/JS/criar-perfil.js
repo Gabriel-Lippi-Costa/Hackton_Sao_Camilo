@@ -4,44 +4,126 @@ const btnCancelar = document.getElementById("cancelar");
 const formCriar = document.getElementById("form-criar-perfil");
 const cardsContainer = document.querySelector(".cards");
 
-btnCriarPerfil.addEventListener("click", () => {
-  modalContainer.classList.add("ativo");
-});
+const baseURL = "http://localhost:3000/auth";
 
-btnCancelar.addEventListener("click", () => {
-  modalContainer.classList.remove("ativo");
-});
+// 🔹 Recupera usuário logado
+const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
+if (!usuario) {
+  alert("Você precisa estar logado para acessar esta página!");
+  window.location.href = "index.html";
+}
 
+// 🔹 Determina nome do usuário (funcionário ou cuidador)
+document.querySelector(".nome-responsavel").innerText =
+  usuario.nome;
+
+// === Abrir/Fechar modal ===
+btnCriarPerfil.addEventListener("click", () => modalContainer.classList.add("ativo"));
+btnCancelar.addEventListener("click", () => modalContainer.classList.remove("ativo"));
 modalContainer.addEventListener("click", (e) => {
-  if (e.target === modalContainer) {
-    modalContainer.classList.remove("ativo");
-  }
+  if (e.target === modalContainer) modalContainer.classList.remove("ativo");
 });
 
-formCriar.addEventListener("submit", (e) => {
+// === Função auxiliar para calcular idade ===
+function calcularIdade(dataNasc) {
+  const nasc = new Date(dataNasc);
+  const hoje = new Date();
+  let idade = hoje.getFullYear() - nasc.getFullYear();
+  const m = hoje.getMonth() - nasc.getMonth();
+  if (m < 0 || (m === 0 && hoje.getDate() < nasc.getDate())) idade--;
+  return idade;
+}
+
+// === Renderizar perfis ===
+function renderizarPacientes(pacientes) {
+  cardsContainer.innerHTML = "";
+
+  if (!pacientes.length) {
+    cardsContainer.innerHTML = "<p>Nenhum perfil cadastrado ainda.</p>";
+    return;
+  }
+
+  pacientes.forEach((p) => {
+    const idade = calcularIdade(p.data_nascimento);
+    const card = document.createElement("section");
+    card.classList.add("card");
+    card.innerHTML = `
+      <i class="bi bi-person"></i>
+      <div class="card-info">
+        <span class="nome-paciente">${p.nome}</span>
+        <span class="info-paciente">${idade} anos - ${p.condicoes_cronicas}</span>
+      </div>
+      <i class="bi bi-trash" data-id="${p.paciente_id}"></i>
+    `;
+
+    // Excluir paciente
+    card.querySelector(".bi-trash").addEventListener("click", async () => {
+      if (confirm(`Excluir o perfil de ${p.nome}?`)) {
+        try {
+          await axios.delete(`${baseURL}/pacientes/${p.paciente_id}`);
+          alert("Perfil removido com sucesso!");
+          carregarPerfis();
+        } catch (erro) {
+          console.error("Erro ao excluir paciente:", erro);
+          alert("Erro ao excluir paciente. Verifique o servidor.");
+        }
+      }
+    });
+
+    cardsContainer.appendChild(card);
+  });
+}
+
+// === Carregar perfis (apenas cuidadores têm vínculo) ===
+async function carregarPerfis() {
+  if (!usuario.cuidador_id) {
+    cardsContainer.innerHTML = "<p>Somente cuidadores têm perfis vinculados.</p>";
+    return;
+  }
+
+  try {
+    const resposta = await axios.get(`${baseURL}/pacientes/${usuario.cuidador_id}`);
+    renderizarPacientes(resposta.data.pacientes);
+  } catch (erro) {
+    console.error("Erro ao carregar perfis:", erro);
+    cardsContainer.innerHTML = "<p>Erro ao carregar perfis do servidor.</p>";
+  }
+}
+
+// === Criar perfil ===
+formCriar.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const nome = document.getElementById("nome").value.trim();
   const idade = document.getElementById("idade").value.trim();
   const parentesco = document.getElementById("parentesco").value.trim();
 
-  if (!nome || !idade || !parentesco) return;
+  if (!nome || !idade || !parentesco) {
+    alert("Preencha todos os campos!");
+    return;
+  }
 
-  const card = document.createElement("section");
-  card.classList.add("card");
-  card.innerHTML = `
-    <i class="bi bi-person"></i>
-    <span class="nome-paciente">${nome}</span>
-    <span class="info-paciente">${idade} anos - ${parentesco}</span>
-    <i class="bi bi-trash"></i>
-  `;
+  // Define IDs de quem está criando
+  const cuidador_id = usuario.cuidador_id || usuario.id_cuidador || null;
+  const funcionario_id = usuario.funcionario_id || usuario.id_funcionario || null;
 
-  cardsContainer.appendChild(card);
+  try {
+    await axios.post(`${baseURL}/pacientes`, {
+      nome,
+      idade,
+      parentesco,
+      cuidador_id,
+      funcionario_id,
+    });
 
-  modalContainer.classList.remove("ativo");
-  formCriar.reset();
-
-  card.querySelector(".bi-trash").addEventListener("click", () => {
-    card.remove();
-  });
+    alert("Perfil criado com sucesso!");
+    modalContainer.classList.remove("ativo");
+    formCriar.reset();
+    carregarPerfis();
+  } catch (erro) {
+    console.error("Erro ao criar perfil:", erro);
+    alert("Erro ao criar perfil. Verifique o servidor.");
+  }
 });
+
+carregarPerfis();

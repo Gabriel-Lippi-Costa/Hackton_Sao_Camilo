@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Atendimento</title>
+
+    <!-- 1. Importar Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 2. Importar Ícones do Google (Material Symbols) -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- 3. Configurar Fonte Padrão (Inter) para o Tailwind -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        }
+    </script>
+
+    <!-- Estilos personalizados para ícones e classes dinâmicas -->
+    <style>
+        /* Ajusta o tamanho dos ícones do Google para corresponder ao texto */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+            /* Tamanho base */
+        }
+
+        .text-4xl .material-symbols-outlined {
+            font-size: 36px;
+        }
+
+        .text-6xl .material-symbols-outlined {
+            font-size: 60px;
+        }
+
+        /* Estilo do loader para a lista de pacientes */
+        .loader-dots div {
+            animation: loader-dots 1.4s infinite ease-in-out both;
+        }
+
+        .loader-dots div:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .loader-dots div:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes loader-dots {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1.0);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+
+    <!-- Cabeçalho -->
+    <header class="flex flex-col md:flex-row justify-between items-center p-5 bg-white border-b border-gray-200">
+        <div class="mb-4 md:mb-0">
+            <h1 class="text-2xl font-semibold">Central de Atendimento</h1>
+            <p class="text-sm text-gray-500">Monitoramento administrativo de todos os pacientes</p>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="text-right hidden sm:block">
+                <span class="text-xs text-gray-500 block">Central de Atendimento</span>
+                <span class="text-sm font-medium">Administrador</span>
+            </div>
+            <button class="p-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 transition-colors">
+                <span class="material-symbols-outlined">shield_person</span>
+            </button>
+            <button class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button id="btn-sair"
+                class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 p-2 rounded-lg transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="text-sm">Sair</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="p-5">
+
+        <!-- Cartões de Estatística -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+
+            <!-- Card: Total de Pacientes -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-start text-gray-500">
+                    <h2 class="text-base font-medium">Total de Pacientes</h2>
+                    <span class="material-symbols-outlined">group</span>
+                </div>
+                <div id="stat-total-pacientes" class="mt-2 hidden">
+                    <span class="text-4xl font-bold block">0</span>
+                    <span class="text-sm text-gray-500">0 ativos nas últimas 24h</span>
+                </div>
+                <!-- Indicador de Carregamento -->
+                <div id="loader-total-pacientes" class="mt-2">
+                    <div class="h-8 w-16 bg-gray-200 rounded animate-pulse"></div>
+                    <div class="h-4 w-24 bg-gray-200 rounded mt-2 animate-pulse"></div>
+                </div>
+            </div>
+
+            <!-- Card: Alertas Ativos -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-start text-gray-500">
+                    <h2 class="text-base font-medium">Alertas Ativos</h2>
+                    <span class="material-symbols-outlined text-red-500">warning</span>
+                </div>
+                <div id="stat-alertas-ativos" class="mt-2 hidden">
+                    <span class="text-4xl font-bold block text-red-500">0</span>
+                    <span class="text-sm text-gray-500">Requerem atenção imediata</span>
+                </div>
+                <!-- Indicador de Carregamento -->
+                <div id="loader-alertas-ativos" class="mt-2">
+                    <div class="h-8 w-10 bg-gray-200 rounded animate-pulse"></div>
+                    <div class="h-4 w-32 bg-gray-200 rounded mt-2 animate-pulse"></div>
+                </div>
+            </div>
+
+            <!-- Card: Taxa de Monitoramento -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex justify-between items-start text-gray-500">
+                    <h2 class="text-base font-medium">Taxa de Monitoramento</h2>
+                    <span class="material-symbols-outlined text-green-500">show_chart</span>
+                </div>
+                <div id="stat-taxa-monitoramento" class="mt-2 hidden">
+                    <span class="text-4xl font-bold block text-green-500">0%</span>
+                    <span class="text-sm text-gray-500">Pacientes com dados recentes</span>
+                </div>
+                <!-- Indicador de Carregamento -->
+                <div id="loader-taxa-monitoramento" class="mt-2">
+                    <div class="h-8 w-12 bg-gray-200 rounded animate-pulse"></div>
+                    <div class="h-4 w-28 bg-gray-200 rounded mt-2 animate-pulse"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Lista de Pacientes -->
+        <section class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+
+            <!-- Cabeçalho da Lista -->
+            <div class="flex flex-col md:flex-row justify-between md:items-center mb-6 gap-4">
+                <div class="patient-list-title">
+                    <h3 class="text-xl font-semibold">Pacientes Monitorados</h3>
+                    <p class="text-sm text-gray-500">Central de atendimento - Visão geral de todos os idosos</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+                    <!-- Busca -->
+                    <div class="flex items-center bg-gray-100 rounded-lg px-3 w-full md:w-auto">
+                        <span class="material-symbols-outlined text-gray-500">search</span>
+                        <input id="search-input" type="text" placeholder="Buscar por nome..."
+                            class="bg-transparent border-0 p-3 text-sm focus:ring-0 w-full">
+                    </div>
+                    <!-- Filtros -->
+                    <div class="button-group flex" role="group">
+                        <button data-filter="Todos"
+                            class="btn-filter bg-gray-800 text-white border-gray-800 py-2 px-4 text-sm font-medium border rounded-l-lg hover:bg-gray-700">
+                            Todos
+                        </button>
+                        <button data-filter="Alertas"
+                            class="btn-filter bg-white text-gray-700 border-gray-300 py-2 px-4 text-sm font-medium border-t border-b hover:bg-gray-50">
+                            Alertas
+                        </button>
+                        <button data-filter="Normal"
+                            class="btn-filter bg-white text-gray-700 border-gray-300 py-2 px-4 text-sm font-medium border rounded-r-lg hover:bg-gray-50">
+                            Normal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Corpo da Lista (será preenchido pelo JS) -->
+            <div id="patient-list-body" class="min-h-[200px]">
+                <!-- Estado de Carregamento Inicial -->
+                <div id="patient-list-loader" class="text-center py-16 flex items-center justify-center">
+                    <div class="loader-dots flex space-x-2">
+                        <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-gray-400 rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Botão de Ajuda Flutuante -->
+    <button id="fab-help"
+        class="fixed bottom-6 right-6 w-14 h-14 bg-gray-800 text-white rounded-full flex items-center justify-center shadow-lg hover:bg-gray-900 transition-all">
+        <span class="material-symbols-outlined">help_outline</span>
+    </button>
+
+    <!-- Modal de Ajuda (oculto por padrão) -->
+    <div id="help-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center p-4 hidden z-50">
+        <div class="bg-white p-6 rounded-2xl shadow-xl w-full max-w-md">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-lg font-semibold">Ajuda</h3>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-800">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <p class="text-sm text-gray-600">
+                Esta é a Central de Atendimento. Use os filtros e a busca para encontrar pacientes. Os cartões no topo
+                mostram um resumo da situação atual.
+            </p>
+        </div>
+    </div>
+
+    <!-- Toast/Notificação (oculto por padrão) -->
+    <div id="toast-message"
+        class="fixed top-6 right-6 bg-green-500 text-white p-4 rounded-lg shadow-md transform translate-x-full transition-transform duration-300 hidden z-50">
+        Você saiu com sucesso.
+    </div>
+
+    <!-- 4. JavaScript Externo para Interatividade -->
+    <!-- O caminho é relativo ao arquivo HTML, que está em public/HTML/ -->
+    <script src="../JS/dashboard-client.js" defer></script>
+</body>
+
+</html>

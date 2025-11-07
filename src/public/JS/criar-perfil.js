@@ -6,25 +6,21 @@ const cardsContainer = document.querySelector(".cards");
 
 const baseURL = "http://localhost:3000/auth";
 
-// 🔹 Recupera usuário logado
 const usuario = JSON.parse(localStorage.getItem("usuarioLogado"));
 if (!usuario) {
   alert("Você precisa estar logado para acessar esta página!");
   window.location.href = "index.html";
 }
 
-// 🔹 Determina nome do usuário (funcionário ou cuidador)
 document.querySelector(".nome-responsavel").innerText =
   usuario.nome;
 
-// === Abrir/Fechar modal ===
 btnCriarPerfil.addEventListener("click", () => modalContainer.classList.add("ativo"));
 btnCancelar.addEventListener("click", () => modalContainer.classList.remove("ativo"));
 modalContainer.addEventListener("click", (e) => {
   if (e.target === modalContainer) modalContainer.classList.remove("ativo");
 });
 
-// === Função auxiliar para calcular idade ===
 function calcularIdade(dataNasc) {
   const nasc = new Date(dataNasc);
   const hoje = new Date();
@@ -34,7 +30,6 @@ function calcularIdade(dataNasc) {
   return idade;
 }
 
-// === Renderizar perfis ===
 function renderizarPacientes(pacientes) {
   cardsContainer.innerHTML = "";
 
@@ -56,7 +51,6 @@ function renderizarPacientes(pacientes) {
       <i class="bi bi-trash" data-id="${p.paciente_id}"></i>
     `;
 
-    // Excluir paciente
     card.querySelector(".bi-trash").addEventListener("click", async () => {
       if (confirm(`Excluir o perfil de ${p.nome}?`)) {
         try {
@@ -74,7 +68,6 @@ function renderizarPacientes(pacientes) {
   });
 }
 
-// === Carregar perfis (apenas cuidadores têm vínculo) ===
 async function carregarPerfis() {
   if (!usuario.cuidador_id) {
     cardsContainer.innerHTML = "<p>Somente cuidadores têm perfis vinculados.</p>";
@@ -90,7 +83,6 @@ async function carregarPerfis() {
   }
 }
 
-// === Criar perfil ===
 formCriar.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -103,7 +95,6 @@ formCriar.addEventListener("submit", async (e) => {
     return;
   }
 
-  // Define IDs de quem está criando
   const cuidador_id = usuario.cuidador_id || usuario.id_cuidador || null;
   const funcionario_id = usuario.funcionario_id || usuario.id_funcionario || null;
 

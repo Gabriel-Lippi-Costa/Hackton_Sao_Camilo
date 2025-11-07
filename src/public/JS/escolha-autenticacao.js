@@ -4,10 +4,9 @@ const formResponsavel = document.querySelector(".info-responsavel");
 const formAdministrador = document.querySelector(".info-administrador");
 const botaoEntrar = document.querySelector(".confirmar-dados button");
 
-let tipoUsuario = "responsavel"; // por padrão
-const baseURL = "http://localhost:3000"; // backend Express
+let tipoUsuario = "responsavel"; 
+const baseURL = "http://localhost:3000"; 
 
-// === Alternar formulários ===
 btnResponsavel.addEventListener("click", () => {
   tipoUsuario = "responsavel";
   btnResponsavel.classList.add("ativo");
@@ -25,10 +24,9 @@ btnAdministrador.addEventListener("click", () => {
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-  btnResponsavel.click(); // começa com o form do responsável
+  btnResponsavel.click(); 
 });
 
-// === Ação do botão de login ===
 botaoEntrar.addEventListener("click", async (e) => {
   e.preventDefault();
 
@@ -59,11 +57,9 @@ botaoEntrar.addEventListener("click", async (e) => {
     console.log(response.data);
     alert(response.data.mensagem || "Login realizado com sucesso!");
 
-    // 🔹 Salva o usuário logado no localStorage (CORREÇÃO PRINCIPAL)
     localStorage.removeItem("usuarioLogado");
     localStorage.setItem("usuarioLogado", JSON.stringify(response.data.usuario));
 
-    // 🔹 Redireciona para a página correta
     if (tipoUsuario === "responsavel") {
       window.location.href = "escolha-perfil.html";
     } else {

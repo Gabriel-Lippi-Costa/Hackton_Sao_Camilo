@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const conexao = require('../models/db');
 
-// === LOGIN CUIDADOR ===
 router.post('/login/cuidador', (req, res) => {
   const { email, senha } = req.body;
 
@@ -28,7 +27,6 @@ router.post('/login/cuidador', (req, res) => {
   });
 });
 
-// === LOGIN FUNCIONÁRIO ===
 router.post('/login/funcionario', (req, res) => {
   const { email, senha } = req.body;
 
@@ -54,7 +52,6 @@ router.post('/login/funcionario', (req, res) => {
   });
 });
 
-// === CADASTRO CUIDADOR ===
 router.post('/cadastro', (req, res) => {
   const { nome, telefone, email, senha } = req.body;
 
@@ -86,7 +83,6 @@ router.post('/cadastro', (req, res) => {
   });
 });
 
-// === CADASTRO FUNCIONÁRIO ===
 router.post('/cadastro-funcionario', (req, res) => {
   const { nome, email, telefone, senha } = req.body;
 
@@ -117,7 +113,6 @@ router.post('/cadastro-funcionario', (req, res) => {
   });
 });
 
-// === CADASTRAR PACIENTE ===
 router.post('/pacientes', (req, res) => {
   const { nome, idade, parentesco, cuidador_id, funcionario_id } = req.body;
 
@@ -125,7 +120,6 @@ router.post('/pacientes', (req, res) => {
     return res.status(400).json({ erro: 'Preencha todos os campos obrigatórios!' });
   }
 
-  // Converter idade em data de nascimento aproximada
   const anoNasc = new Date().getFullYear() - parseInt(idade);
   const data_nascimento = `${anoNasc}-01-01`;
 
@@ -142,7 +136,6 @@ router.post('/pacientes', (req, res) => {
 
     const pacienteId = resultadoPaciente.insertId;
 
-    // Se for cuidador, cria o vínculo
     if (cuidador_id) {
       const sqlVinculo = `
         INSERT INTO saomaua.Paciente_Cuidador (paciente_id, cuidador_id)
@@ -160,7 +153,6 @@ router.post('/pacientes', (req, res) => {
         });
       });
     } else {
-      // Caso criado por funcionário, não precisa vínculo
       res.status(201).json({
         mensagem: 'Paciente cadastrado por funcionário com sucesso!',
         paciente_id: pacienteId,
@@ -169,7 +161,6 @@ router.post('/pacientes', (req, res) => {
   });
 });
 
-// === LISTAR PACIENTES POR CUIDADOR ===
 router.get('/pacientes/:cuidador_id', (req, res) => {
   const { cuidador_id } = req.params;
 
@@ -194,7 +185,6 @@ router.get('/pacientes/:cuidador_id', (req, res) => {
   });
 });
 
-// === DELETAR PACIENTE ===
 router.delete('/pacientes/:paciente_id', (req, res) => {
   const { paciente_id } = req.params;
 

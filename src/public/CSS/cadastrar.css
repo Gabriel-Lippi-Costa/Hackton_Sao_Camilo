@@ -1,0 +1,193 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f3f7ff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background-color: #fff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.cabecalho i {
+  background-color: #e7f0ff;
+  color: #1a56f0;
+  font-size: 28px;
+  padding: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.cabecalho h2 {
+  font-size: 22px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.cabecalho h3 {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 6px;
+}
+
+.escolha-autenticacao {
+  margin-top: 25px;
+}
+
+.tipo-usuario {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.tipo-usuario div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #eef3ff;
+  color: #1a56f0;
+  border-radius: 25px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tipo-usuario div:hover {
+  background-color: #dce7ff;
+  transform: translateY(-2px);
+}
+
+.tipo-usuario .ativo {
+  background-color: #1a56f0;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(26, 86, 240, 0.25);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+input {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1a56f0;
+  background-color: #fff;
+}
+
+.btn-cadastrar {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #1a56f0;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-cadastrar:hover {
+  background-color: #153fa5;
+  transform: translateY(-1px);
+}
+
+.login-conta,
+.redefinir-senha {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.login-conta a,
+.redefinir-senha a {
+  color: #1a56f0;
+  text-decoration: none;
+}
+
+.login-conta a:hover,
+.redefinir-senha a:hover {
+  text-decoration: underline;
+}
+
+.info-administrador,
+.info-responsavel {
+  display: none;
+}
+
+.info-administrador.ativo,
+.info-responsavel.ativo {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    margin: 20px;
+    padding: 30px;
+  }
+
+  .tipo-usuario {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tipo-usuario div {
+    width: 80%;
+    justify-content: center;
+  }
+
+  .btn-cadastrar {
+    font-size: 14px;
+  }
+}

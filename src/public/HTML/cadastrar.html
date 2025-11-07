@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2MN Pulse</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../CSS/cadastrar.css">
+</head>
+
+<body>
+
+    <main>
+        <section class="cabecalho">
+            <i class="bi bi-suit-heart"></i>
+            <h2>Monitoramento de Saúde</h2>
+            <h3>Sistema de acompanhamento de sinais vitais via smartwatch</h3>
+        </section>
+
+        <section class="escolha-autenticacao">
+            <section class="tipo-usuario">
+                <div class="responsavel ativo">
+                    <i class="bi bi-person-heart"></i>
+                    <span>Responsável</span>
+                </div>
+
+                <div class="administrador">
+                    <i class="bi bi-shield-lock"></i>
+                    <span>Administrador</span>
+                </div>
+            </section>
+
+            <!-- Form Responsável -->
+            <section class="info-responsavel">
+                <form action="#" method="post" id="form-responsavel">
+                    <label for="nome-completo-responsavel">Nome Completo</label>
+                    <input type="text" id="nome-completo-responsavel" required placeholder="Ex: Gabriel Lippi">
+
+                    <label for="email-responsavel">E-mail</label>
+                    <input type="email" id="email-responsavel" required placeholder="exemplo@email.com">
+
+                    <label for="senha-responsavel">Senha</label>
+                    <input type="password" id="senha-responsavel" required placeholder="Mínimo 8 caracteres">
+
+                    <label for="telefone-responsavel">Telefone</label>
+                    <input type="tel" id="telefone-responsavel" oninput="validarTelefone(this)"
+                        placeholder="(11) 98765-4321">
+                    <span id="msgTEL"></span>
+
+                    <button type="submit" class="btn-cadastrar">Cadastrar como Responsável</button>
+                </form>
+            </section>
+
+            <!-- Form Administrador -->
+            <section class="info-administrador">
+                <form action="#" method="post" id="form-administrador">
+                    <label for="nome-completo-administrador">Nome Completo</label>
+                    <input type="text" id="nome-completo-administrador" required placeholder="Ex: João Afonso">
+
+                    <label for="email-administrador">E-mail</label>
+                    <input type="email" id="email-administrador" required placeholder="exemplo@email.com">
+
+                    <label for="senha-administrador">Senha</label>
+                    <input type="password" id="senha-administrador" required placeholder="Mínimo 8 caracteres">
+
+                    <label for="telefone-administrador">Telefone</label>
+                    <input type="tel" id="telefone-administrador" oninput="validarTelefone(this)"
+                        placeholder="(11) 91234-5678">
+                    <span id="msgTEL"></span>
+
+                    <button type="submit" class="btn-cadastrar">Cadastrar como Administrador</button>
+                </form>
+            </section>
+
+            <section class="login-conta">
+                <a href="index.html">Já tem uma conta? Faça login</a>
+            </section>
+        </section>
+    </main>
+
+
+    <script src="../JS/validacao-telefone.js"></script>
+    <script src="../JS/escolha-cadastro.js"></script>
+</body>
+
+</html>

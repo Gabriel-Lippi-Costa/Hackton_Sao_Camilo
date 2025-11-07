@@ -323,9 +323,6 @@ main .cards .card .card-info {
   display: flex;
 }
 
-/* ======== RESPONSIVIDADE ======== */
-
-/* Tablets e telas médias (até 900px) */
 @media (max-width: 900px) {
   header {
     padding: 14px 30px;
@@ -353,7 +350,6 @@ main .cards .card .card-info {
   }
 }
 
-/* Celulares (até 600px) */
 @media (max-width: 600px) {
   header {
     flex-direction: column;
@@ -396,7 +392,6 @@ main .cards .card .card-info {
   }
 }
 
-/* Celulares muito pequenos (até 400px) */
 @media (max-width: 400px) {
   header {
     padding: 12px 16px;

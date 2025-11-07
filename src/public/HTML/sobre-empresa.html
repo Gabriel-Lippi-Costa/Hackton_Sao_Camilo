@@ -10,17 +10,23 @@
 <body>
     
     <header>
-        <section class="lado-esquerdo">
+        <div class="logo">
             <h2>A2MN Pulse</h2>
-        </section>
+        </div>
 
-        <section class="lado-direito">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav">
             <ul>
-                <li><a href="#sobre-nos">Sobre nós</a></li>
-                <li><a href="#produto">Produto</a></li>
-                <li><a href="#contatos">Contatos</a></li>
+                <li><a href="#sobre-nos" onclick="closeMenu()">Sobre nós</a></li>
+                <li><a href="#produto" onclick="closeMenu()">Produto</a></li>
+                <li><a href="#contatos" onclick="closeMenu()">Contatos</a></li>
             </ul>
-        </section>
+        </nav>
     </header>
 
     <main>
@@ -34,8 +40,6 @@
                 Segundo a OMS, <strong>71% das mortes globais</strong> são causadas por doenças crônicas que poderiam ser controladas com intervenções precoces e monitoramento constante.
             </blockquote>
         </section>
-        
-        <hr>
 
         <section class="produto" id="produto">
             <h1>Como funciona o produto? ⌚</h1>
@@ -47,7 +51,7 @@
             <p>O produto evita o agravamento de quadros clínicos monitorando em tempo real sinais vitais essenciais e identificando precocemente crises.</p>
             
             <ul>
-                <li><strong>Monitoramento Avançado:</strong> Monitoramento cardíaco, Variabilidade da Frequência Cardíaca (HRV) para prever estresse e crises, e detecção precoce de queda de saturação de $O_2$.</li>
+                <li><strong>Monitoramento Avançado:</strong> Monitoramento cardíaco, Variabilidade da Frequência Cardíaca (HRV) para prever estresse e crises, e detecção precoce de queda de saturação de O₂.</li>
                 <li><strong>Glicemia:</strong> Monitoramento de glicemia <strong>não invasiva</strong> via espectroscopia infravermelha.</li>
                 <li><strong>Previsão de Crises:</strong> Sensor de sudorese e temperatura dérmica para antecipar hipoglicemia e crises epilépticas.</li>
                 <li><strong>Acionamento de Emergência:</strong> Acionamento automático, por <strong>comando de voz e toque inteligente</strong>, que notifica familiares e profissionais, acionando serviços médicos diretamente.</li>
@@ -60,23 +64,39 @@
             <p>A pulseira proporciona redução de custos (prevenção é mais barata que internações emergenciais) e alivia a sobrecarga dos profissionais de saúde e cuidadores. Além disso, salva vidas, promove autonomia e melhora a qualidade de vida.</p>
         </section>
 
-        <hr>
-
         <section class="contatos" id="contatos">
             <h1>Contatos 📞</h1>
             <h2>Integrantes do Projeto A2MN PULSE</h2>
             <p>Para mais informações, entre em contato com os membros da equipe:</p>
             
             <ul>
-                <li>Gabriel Lippi da Costa</li>
-                <li>Daniel Cruz Santana</li>
-                <li>Arthur Monteiro</li>
-                <li>Débora Tovazi Silva</li>
-                <li>Gabriel Augusto Neves</li>
-                <li>Thawanne Ferreira</li>
+                <li>Gabriel Lippi da Costa<br>(11) 9999-9999</li>
+                <li>Daniel Cruz Santana<br>(11) 9999-9999</li>
+                <li>Arthur Monteiro<br>(11) 9999-9999</li>
+                <li>Débora Tovazi Silva<br>(11) 9999-9999</li>
+                <li>Gabriel Augusto Neves<br>(11) 9999-9999</li>
+                <li>Thawanne Ferreira<br>(11) 9999-9999</li>
             </ul>
         </section>
     </main>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.menu-toggle');
+            nav.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.menu-toggle');
+            if (window.innerWidth <= 768) {
+                nav.classList.remove('active');
+                toggle.classList.remove('active');
+            }
+        }
+    </script>
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-app.post('/cadastro', (req, res) => {
+router.post('/cadastro', (req, res) => {
     const { nome, telefone, email, relacao_paciente } = req.body;
 
     // Verifica campos obrigatórios
@@ -33,7 +33,7 @@ app.post('/cadastro', (req, res) => {
     });
 });
 
-app.post('/cadastro-funcionario', (req, res) => {
+router.post('/cadastro-funcionario', (req, res) => {
     const { nome, email, telefone, senha} = req.body;
 
     if (!nome || !email || !senha) {

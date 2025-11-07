@@ -3,7 +3,6 @@ const btnAdm = document.querySelector(".administrador");
 const formResp = document.querySelector(".info-responsavel");
 const formAdm = document.querySelector(".info-administrador");
 
-// Alternar entre os tipos de usuário
 btnResp.addEventListener("click", () => {
   btnResp.classList.add("ativo");
   btnAdm.classList.remove("ativo");

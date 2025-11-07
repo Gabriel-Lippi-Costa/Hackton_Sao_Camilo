@@ -1,11 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>A2MN Pulse</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <main>
+
+        <seciton class="cabecalho">
+            <i class="bi bi-suit-heart"></i>
+            <h2>Monitoramento de Saúde</h2>
+            <h3>Sistema de acompanhamento de sinais vitais via smartwatch</h3>
+        </seciton>
+
+        <section class="escolha-autenticacao">
+            <section class="responsavel" onclick="">
+                <i class="bi bi-suit-heart"></i>
+                <span>Responsável</span>
+            </section>
+
+            <section class="administrador" onclick="">
+                <i class="bi bi-shield"></i>
+                <span>Administrador</span>
+            </section>
+
+
+            <section class="info-responsavel">
+                <form action="#" method="post" id="form-responsavel">
+                    <label for="email-responsavel">E-mail Responsável</label>
+                    <input type="email" name="email-responsavel" id="email-responsavel">
+
+                    <label for="senha-responsavel">Senha Responsável</label>
+                    <input type="password" name="senha-responsavel" id="senha-responsavel">
+                </form>
+            </section>
+
+            <section class="info-administrador">
+                <form action="#" method="post" id="form-administrador">
+                    <label for="email-responsavel">E-mail Administrador</label>
+                    <input type="email" name="email-administrador" id="email-administrador" required>
+
+                    <label for="senha-responsavel">Senha Administrador</label>
+                    <input type="password" name="senha-administrador" id="senha-administrador" required min="8" max="50">
+                </form>
+            </section>
+
+            <section class="confirmar-dados">
+                <button>
+                    Entrar
+                </button>
+            </section>
+
+            <section class="criar-conta">
+                <a href="#">Não tem uma conta? Cadastre-se</a>
+            </section>
+
+            <section class="redefinir-senha">
+                <a href="#">
+                    Esqueceu uma senha? Clique aqui para redefinir
+                </a>
+            </section>
+        </section>
+
+    </main>
+
+    <script src="escolha-autenticacao.js"></script>
 </body>
+
 </html>

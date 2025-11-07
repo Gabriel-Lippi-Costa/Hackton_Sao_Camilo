@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background-color: #f3f7ff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main {
+  background-color: #fff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.cabecalho i {
+  background-color: #e7f0ff;
+  color: #1a56f0;
+  font-size: 28px;
+  padding: 18px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 18px;
+}
+
+.cabecalho h2 {
+  font-size: 22px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.cabecalho h3 {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+  margin-top: 6px;
+}
+
+.escolha-autenticacao {
+  margin-top: 25px;
+}
+
+.responsavel,
+.administrador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #f4f6fb;
+  color: #111827;
+  padding: 10px 16px;
+  border-radius: 25px;
+  transition: all 0.2s ease-in-out;
+}
+
+.responsavel i,
+.administrador i {
+  font-size: 16px;
+}
+
+.responsavel,
+.administrador {
+  transition: all 0.3s ease;
+}
+
+.responsavel:hover,
+.administrador:hover {
+  transform: scale(1.05);
+  background-color: #e0e7ff;
+}
+
+.responsavel.ativo,
+.administrador.ativo {
+  background-color: #1a56f0;
+  color: #fff;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 25px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+input {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background-color: #f9fafb;
+  transition: border-color 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #1a56f0;
+  background-color: #fff;
+}
+
+.confirmar-dados {
+  margin-top: 25px;
+}
+
+.confirmar-dados button {
+  width: 100%;
+  background-color: #111827;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.confirmar-dados button:hover {
+  background-color: #1a56f0;
+}
+
+.criar-conta,
+.redefinir-senha {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.criar-conta a,
+.redefinir-senha a {
+  color: #1a56f0;
+  text-decoration: none;
+}
+
+.criar-conta a:hover,
+.redefinir-senha a:hover {
+  text-decoration: underline;
+}
+
+.info-administrador,
+.info-responsavel {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  main {
+    margin: 20px;
+    padding: 30px;
+  }
+
+  .responsavel,
+  .administrador {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

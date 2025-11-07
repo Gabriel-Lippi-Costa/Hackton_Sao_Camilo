@@ -6,12 +6,14 @@ const path = require('path');
 const app = express();
 const conexao = require('./models/db');
 const rotasLogin = require('./routes/authenticationRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 
 // === Middlewares ===
 app.use(cors());
 app.use(express.json());
 app.use('/auth', rotasLogin); // ✅ todas as rotas começam com /auth
 
+app.use('/api', dashboardRoutes);
 // === Conexão ao banco e start do servidor ===
 conexao.connect((erro) => {
   if (erro) {

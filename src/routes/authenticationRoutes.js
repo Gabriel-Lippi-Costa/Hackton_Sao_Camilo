@@ -67,3 +67,47 @@ router.post('/cadastro-funcionario', (req, res) => {
         }
     );
 });
+
+app.post('/login', (req, res) => {
+    const { email, senha } = req.body;
+
+    if (!email || !senha) {
+        return res.status(400).json({ erro: 'Preencha todos os campos!' });
+    }
+
+    const sqlCliente = 'SELECT * FROM clientes WHERE email_cliente = ? AND senha_cliente = ?';
+    conexao.query(sqlCliente, [email, senha], (erro, resultadoCliente) => {
+        if (erro) {
+            console.error('Erro ao consultar cliente: ', erro);
+            return res.status(500).json({ erro: 'Erro ao realizar login' });
+        }
+
+        if (resultadoCliente.length > 0) {
+            const usuario = resultadoCliente[0];
+            return res.status(200).json({
+                mensagem: 'Login de cliente realizado com sucesso!',
+                tipo: 'cliente',
+                usuario
+            });
+        }
+
+        const sqlFuncionario = 'SELECT * FROM funcionarios WHERE email_funcionario = ? AND senha_funcionario = ?';
+        conexao.query(sqlFuncionario, [email, senha], (erro2, resultadoFunc) => {
+            if (erro2) {
+                console.error('Erro ao consultar funcionário: ', erro2);
+                return res.status(500).json({ erro: 'Erro ao realizar login' });
+            }
+
+            if (resultadoFunc.length === 0) {
+                return res.status(401).json({ erro: 'Email ou senha incorretos!' });
+            }
+
+            const funcionario = resultadoFunc[0];
+            return res.status(200).json({
+                mensagem: 'Login de funcionário realizado com sucesso!',
+                tipo: 'funcionario',
+                usuario: funcionario
+            });
+        });
+    });
+});

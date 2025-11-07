@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f3f7ff;
+  min-height: 100vh;
+}
+
+header {
+  width: 100%;
+  background-color: #f3f7ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 60px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header .lado-esquerdo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+header .lado-esquerdo h2 {
+  color: #111827;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+header .lado-esquerdo h3 {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+header .lado-direito {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+header .lado-direito .nome-responsavel {
+  color: #374151;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+header .lado-direito .bi-person {
+  font-size: 28px;
+  color: #1a56f0;
+  background-color: #eef3ff;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+header .lado-direito button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #1a56f0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+header .lado-direito button:hover {
+  background-color: #153fa5;
+}
+
+header .lado-direito button i {
+  font-size: 18px;
+}
+
+main {
+  margin-top: 20px;
+}
+
+main .cabecalho-main {
+  width: 100%;
+  background-color: #f3f7ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 60px;
+}
+
+main .cabecalho-main h2 {
+  color: #111827;
+  font-family: "Poppins", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+main .cabecalho-main h3 {
+  color: #6b7280;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+main .criar-perfil button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #1a56f0;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+main .cards {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+main .cards .card {
+  width: 400px;
+  height: 50px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 20px;
+  border-radius: 20px;
+}
+
+main .cards .card i {
+  color: #1a56f0;
+  font-size: 28px;
+}
+
+main .cards .card .nome-paciente {
+    font-size: 18px;
+    font-weight: bolder;
+    
+}
